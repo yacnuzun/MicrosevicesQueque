@@ -67,7 +67,7 @@ namespace SupplierAPI.Controllers
             return true;
         }
 
-        [HttpPost("listingBills")]
+        [HttpGet("listingBills")]
         [Authorize]
         public async Task<IActionResult> ListingBills()
         {
