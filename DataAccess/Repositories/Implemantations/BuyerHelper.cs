@@ -16,7 +16,7 @@ namespace Shared.Repositories.Implemantations
 {
     public class BuyerHelper : IBuyerHelper
     {
-        public Task<BillEvent> CreateABill(CreateBillDTO dto)
+        public async Task<BillEvent> CreateABill(CreateBillDTO dto)
         {
             Random random = new Random();
 
@@ -42,7 +42,7 @@ namespace Shared.Repositories.Implemantations
                 addedEntity.State = EntityState.Added;
                 context.SaveChanges();
                 
-                return Task.FromResult(BillEvent.GetViewModel(newBill));
+                return await Task.FromResult(BillEvent.GetViewModel(newBill));
 
             }
 

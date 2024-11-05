@@ -38,7 +38,7 @@ namespace BuyerAPI.Controllers
         }
 
         [HttpPost("login")]
-        public ActionResult Login(UserForLoginDto userForLoginDto)
+        public async Task<ActionResult> Login(UserForLoginDto userForLoginDto)
         {
             var userToLogin = _authService.Login(userForLoginDto,role);
             if (!userToLogin.Success)
