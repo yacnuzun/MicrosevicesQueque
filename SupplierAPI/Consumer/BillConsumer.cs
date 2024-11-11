@@ -1,28 +1,17 @@
 ﻿using MassTransit;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
-using Shared.Entities;
-using Shared.Entities.DbConnectionContext;
-using Shared.Events;
-using Shared.Helpers.Security.JWT;
-using SupplierAPI.Extensions;
-using System.Security.Claims;
+using SupplierAPI.Events;
+using SupplierAPI.Entities.DbConectionContext;
+using SupplierAPI.Entities;
 
 namespace SupplierAPI.Consumer
 {
     public class BillConsumer : IConsumer<BillEvent>
     {
-        static HttpClient _httpClient = new HttpClient();
-        private readonly IHttpContextAccessor _httpContextAccessor;
-        public BillConsumer(IHttpContextAccessor httpContextAccessor)
-        {
-            _httpContextAccessor = httpContextAccessor;
-        }
-
         public async Task Consume(ConsumeContext<BillEvent> context)
         {
 
-            using (var dbContext = new SupplyChainDbContext())
+            using (var dbContext = new SuplierDbContext())
             {
                 var addedEntity = dbContext.Entry(new QueueMessage
                 {

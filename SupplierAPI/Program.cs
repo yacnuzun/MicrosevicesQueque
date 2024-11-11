@@ -1,6 +1,5 @@
 
 using Autofac;
-using Autofac.Core;
 using Autofac.Extensions.DependencyInjection;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -8,10 +7,10 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Quartz;
 using Shared.Constant;
-using Shared.DependencyResolver.AutofacHelper;
 using Shared.Helpers.Security.Encryption;
-using Shared.Helpers.Security.JWT;
+using Shared.Helpers.Security.Security;
 using SupplierAPI.Consumer;
+using SupplierAPI.DependencyResolver.AutofacHelper;
 using SupplierAPI.Extensions;
 using SupplierAPI.Helpers.Quartz;
 

@@ -1,12 +1,11 @@
 
-using Autofac.Extensions.DependencyInjection;
 using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using FinancialAPI.DependencyResolver.AutofacHelper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using Shared.DependencyResolver.AutofacHelper;
 using Shared.Helpers.Security.Encryption;
-using Shared.Helpers.Security.JWT;
+using Shared.Helpers.Security.Security;
 
 namespace FinancialAPI
 {

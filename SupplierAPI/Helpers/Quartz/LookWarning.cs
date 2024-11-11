@@ -1,16 +1,6 @@
-﻿using Autofac.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json.Linq;
+﻿using Microsoft.EntityFrameworkCore;
 using Quartz;
-using Shared.Entities;
-using Shared.Entities.DbConnectionContext;
-using SupplierAPI.Controllers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using SupplierAPI.Entities.DbConectionContext;
 
 namespace SupplierAPI.Helpers.Quartz
 {
@@ -18,7 +8,7 @@ namespace SupplierAPI.Helpers.Quartz
     {
         public async Task Execute(IJobExecutionContext context)
         {
-            using (var dbContext = new SupplyChainDbContext())
+            using (var dbContext = new SuplierDbContext())
             {
                 var list = dbContext.QueueMessages.ToList();
                 foreach (var item in list.Where(l=> l.IsRead is not true).ToList())

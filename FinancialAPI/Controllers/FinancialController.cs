@@ -1,5 +1,6 @@
+using FinancialAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Shared.Repositories.Interfaces;
+using IResult = Shared.Helpers.ResponseModels.GenericResultModels.IResult;
 
 namespace FinancialAPI.Controllers
 {

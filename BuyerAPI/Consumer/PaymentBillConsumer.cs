@@ -1,8 +1,5 @@
-﻿using MassTransit;
-using Microsoft.EntityFrameworkCore;
-using Shared.Entities.DbConnectionContext;
-using Shared.Entities;
-using Shared.Events;
+﻿using BuyerAPI.Events;
+using MassTransit;
 
 namespace BuyerAPI.Consumer
 {

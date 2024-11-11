@@ -1,20 +1,16 @@
 
-using Autofac.Extensions.DependencyInjection;
 using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using BuyerAPI.Consumer;
+using BuyerAPI.DependencyResolver.AutofacHelper;
+using BuyerAPI.Events;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using Shared.DependencyResolver.AutofacHelper;
-using Shared.Events;
-using Shared.Helpers;
-using Shared.Helpers.Security.Encryption;
-using Shared.Helpers.Security.JWT;
-using Shared.Repositories.Implemantations;
-using Shared.Repositories.Interfaces;
 using Microsoft.OpenApi.Models;
 using Shared.Constant;
-using BuyerAPI.Consumer;
+using Shared.Helpers.Security.Encryption;
+using Shared.Helpers.Security.Security;
 
 namespace BuyerAPI
 {
@@ -77,7 +73,6 @@ namespace BuyerAPI
                                     IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
                                 };
                             });
-            builder.Services.AddSingleton<IBuyerHelper, BuyerHelper>();
 
             var rabbitOption = configurationManager.GetSection("RabbitOptions").Get<RabbitOptions>();
 
