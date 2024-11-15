@@ -10,16 +10,5 @@ namespace SupplierAPI.Dto_s
         public Status Status { get; set; }
         public decimal InvoiceCost { get; set; }
 
-        public static BillListingDTO GetViewModel(Bill model)
-        {
-            return new BillListingDTO
-            {
-                InvoiceNumber = model.InvoiceNumber,
-                Buyer = model.BuyerTaxID,
-                Supplier = model.SuplierTaxID,
-                InvoiceCost = model.InvoiceCost,
-                Status = model.InovoiceStatus
-            };
-        }
     }
 }

@@ -1,18 +1,12 @@
 ﻿using BuyerAPI.Dto_s;
 using BuyerAPI.Entities;
-using BuyerAPI.Entities.DbConnectionContext;
-using BuyerAPI.Events;
 using BuyerAPI.Repositories.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Shared.Constant;
-using Shared.Helpers.ResponseModels.GenericResultModels;
-using System.Data;
-using System.IdentityModel.Tokens.Jwt;
-using System.Net.Http.Headers;
-using System.Net;
-using IResult = Shared.Helpers.ResponseModels.GenericResultModels.IResult;
 using Shared.Dto_s;
+using Shared.Events;
+using Shared.Helpers.ResponseModels.GenericResultModels;
+using System.Net.Http.Headers;
 
 namespace BuyerAPI.Repositories.Implemantations
 {
@@ -48,50 +42,38 @@ namespace BuyerAPI.Repositories.Implemantations
 
         public async Task<BillEvent> CreateABill(CreateBillDTO dto)
         {
-            Random random = new Random();
+            var request = await client.PostAsJsonAsync("https://localhost:7221/Bill/createabill", dto);
 
-            int billID = random.Next(0, 100);
-            int invoiceNum = random.Next(0, 100000);
-
-
-
-            using (var context = new BuyerDbContext())
+            if (!request.IsSuccessStatusCode)
             {
-                var newBill = new Bill
-                {
-                    BillID = billID,
-                    BuyerTaxID = dto.BuyerTaxID,
-                    SuplierTaxID = dto.SuplierTaxID,
-                    InovoiceStatus = Status.New,
-                    InvoiceCost = dto.InvoiceCost,
-                    InvoiceNumber = invoiceNum.ToString(),
-                    TermDate = string.IsNullOrEmpty(dto.TermDate) ? dto.TermDate : DateTime.Now.ToShortDateString()
-                };
-
-                var addedEntity = context.Entry(newBill);
-                addedEntity.State = EntityState.Added;
-                context.SaveChanges();
-
-                return await Task.FromResult(BillEvent.GetViewModel(newBill));
-
+                return null;
             }
 
+            string response = await request.Content.ReadAsStringAsync();
+
+            BillResponseDto dtoResponse = JsonConvert.DeserializeObject<BillResponseDto>(response);
+
+            if (dtoResponse is null)
+            {
+                return null;
+            }
+
+            return await Task.FromResult(BillEvent.GetViewModel(dtoResponse));
         }
 
         public async Task<IDataResult<List<BillListingDTO>>> GetBills(string buyerTaxId)
         {
-            using (var context = new BuyerDbContext())
+            var request = await client.GetFromJsonAsync<List<BillListingDTO>>("https://localhost:7221/bill/getbillbuyer?buyerTaxId=" + buyerTaxId);
+
+            //var response = JsonConvert.DeserializeObject<IDataResult<List<BillListingDTO>>>(request);
+
+            if (request is null)
             {
-                var list = context.Bills.Where(b => b.BuyerTaxID == buyerTaxId).ToList();
-                if (list != null)
-                {
-                    var dtoList = list.Select(BillListingDTO.GetViewModel).ToList();
-                    return new SuccessDataResult<List<BillListingDTO>>(dtoList);
-
-                }
-
                 return new ErrorDataResult<List<BillListingDTO>>(Messages.FailedProccess);
             }
+
+            return new SuccessDataResult<List<BillListingDTO>>(request);
+            
         }
     }
 }

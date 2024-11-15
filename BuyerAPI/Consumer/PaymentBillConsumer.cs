@@ -1,5 +1,5 @@
-﻿using BuyerAPI.Events;
-using MassTransit;
+﻿using MassTransit;
+using Shared.Events;
 
 namespace BuyerAPI.Consumer
 {

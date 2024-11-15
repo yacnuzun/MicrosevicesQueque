@@ -1,9 +1,9 @@
-﻿using BuyerAPI.Entities;
+﻿using BillApi.Entities;
 using Shared.Abstract;
 
-namespace BuyerAPI.Events
+namespace BillApi.Dto_s
 {
-    public partial class EarlyPaymentEvent : IEvent
+    public class PaymentRequestDto:IDTO
     {
         public string InovoiceNumber { get; set; }
         public string TermDate { get; set; }
@@ -11,9 +11,10 @@ namespace BuyerAPI.Events
         public string SuplierTaxID { get; set; }
         public decimal InvoiceCost { get; set; }
         public Status InvoiceStatus { get; set; }
-        public static EarlyPaymentEvent GetViewModel(Bill model)
+        
+        public static PaymentRequestDto GetViewModel(Bill model)
         {
-            return new EarlyPaymentEvent
+            return new PaymentRequestDto
             {
                 TermDate = model.TermDate,
                 InvoiceCost = model.InvoiceCost,
@@ -24,4 +25,5 @@ namespace BuyerAPI.Events
             };
         }
     }
+
 }

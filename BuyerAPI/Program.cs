@@ -3,12 +3,12 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using BuyerAPI.Consumer;
 using BuyerAPI.DependencyResolver.AutofacHelper;
-using BuyerAPI.Events;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Shared.Constant;
+using Shared.Events;
 using Shared.Helpers.Security.Encryption;
 using Shared.Helpers.Security.Security;
 

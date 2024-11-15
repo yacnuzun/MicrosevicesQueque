@@ -1,6 +1,6 @@
 ﻿using Shared.Interfaces;
 
-namespace FinancialAPI.Entities
+namespace BillApi.Entities
 {
     public class Bill : IEntity
     {

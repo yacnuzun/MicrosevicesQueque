@@ -11,8 +11,6 @@ namespace SupplierAPI.Entities.DbConectionContext
 
         public DbSet<Supplier> Suppliers { get; set; }
 
-        public DbSet<Bill> Bills { get; set; }
-
         //QueueMessages table
         public DbSet<QueueMessage> QueueMessages { get; set; }
     }

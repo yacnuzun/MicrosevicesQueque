@@ -1,8 +1,8 @@
 ﻿using MassTransit;
 using Microsoft.EntityFrameworkCore;
-using SupplierAPI.Events;
-using SupplierAPI.Entities.DbConectionContext;
+using Shared.Events;
 using SupplierAPI.Entities;
+using SupplierAPI.Entities.DbConectionContext;
 
 namespace SupplierAPI.Consumer
 {

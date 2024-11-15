@@ -20,41 +20,6 @@ namespace FinancialAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("FinancialAPI.Entities.Bill", b =>
-                {
-                    b.Property<int>("BillID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("BillID"));
-
-                    b.Property<string>("BuyerTaxID")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("InovoiceStatus")
-                        .HasColumnType("integer");
-
-                    b.Property<decimal>("InvoiceCost")
-                        .HasColumnType("numeric");
-
-                    b.Property<string>("InvoiceNumber")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("SuplierTaxID")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("TermDate")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("BillID");
-
-                    b.ToTable("Bills");
-                });
 #pragma warning restore 612, 618
         }
     }

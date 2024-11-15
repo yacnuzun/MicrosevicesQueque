@@ -1,7 +1,12 @@
 ﻿using Shared.Abstract;
-using SupplierAPI.Entities;
+using Shared.Dto_s;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace SupplierAPI.Events
+namespace Shared.Events
 {
     public partial class EarlyPaymentEvent : IEvent
     {
@@ -11,7 +16,7 @@ namespace SupplierAPI.Events
         public string SuplierTaxID { get; set; }
         public decimal InvoiceCost { get; set; }
         public Status InvoiceStatus { get; set; }
-        public static EarlyPaymentEvent GetViewModel(Bill model)
+        public static EarlyPaymentEvent GetViewModel(PaymentRequestDto model)
         {
             return new EarlyPaymentEvent
             {
@@ -20,7 +25,7 @@ namespace SupplierAPI.Events
                 BuyerTaxID = model.BuyerTaxID,
                 InovoiceNumber = model.InvoiceNumber,
                 SuplierTaxID = model.SuplierTaxID,
-                InvoiceStatus = model.InovoiceStatus
+                InvoiceStatus = model.InvoiceStatus
             };
         }
     }

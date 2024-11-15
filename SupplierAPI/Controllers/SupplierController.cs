@@ -59,12 +59,6 @@ namespace SupplierAPI.Controllers
                 return Ok(userRequest.Message);
             }
 
-            #region bunun yerine üstte checkUser metodu yazýldý..
-            //var jwtToken = _tokenHelper.ValidateTokenGetClaims(HttpContext.Request.Headers.Authorization.ToString().Replace("Bearer ",""));
-
-            //var token = jwtToken.Claims.FirstOrDefault(s => s.Type.Contains("nameidentifier")).Value;
-            #endregion
-
             var request = await _suplierHelper.GetBillswithSupplier(userRequest.Data.NameIdentifier);
 
             if (request == null)

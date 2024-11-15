@@ -1,27 +1,24 @@
-﻿using Shared.Abstract;
-using SupplierAPI.Entities;
+﻿using BillApi.Entities;
+using Shared.Abstract;
 
-namespace SupplierAPI.Events
+namespace BillApi.Dto_s
 {
-    public partial class BillEvent : IEvent
+    public class CreateBillDTO: IDTO
     {
-        public string InovoiceNumber { get; set; }
         public string TermDate { get; set; }
         public string BuyerTaxID { get; set; }
         public string SuplierTaxID { get; set; }
         public decimal InvoiceCost { get; set; }
-        public Status InvoiceStatus { get; set; }
-        public static BillEvent GetViewModel(Bill model)
+        public static CreateBillDTO GetViewModel(Bill model)
         {
-            return new BillEvent
+            return new CreateBillDTO
             {
                 TermDate = model.TermDate,
                 InvoiceCost = model.InvoiceCost,
                 BuyerTaxID = model.BuyerTaxID,
-                InovoiceNumber = model.InvoiceNumber,
                 SuplierTaxID = model.SuplierTaxID,
-                InvoiceStatus = model.InovoiceStatus
             };
         }
     }
+
 }

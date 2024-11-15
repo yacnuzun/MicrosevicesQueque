@@ -1,9 +1,7 @@
 ﻿using BuyerAPI.Dto_s;
-using BuyerAPI.Events;
 using Shared.Dto_s;
+using Shared.Events;
 using Shared.Helpers.ResponseModels.GenericResultModels;
-using System.IdentityModel.Tokens.Jwt;
-using IResult = Shared.Helpers.ResponseModels.GenericResultModels.IResult;
 
 namespace BuyerAPI.Repositories.Interfaces
 {
