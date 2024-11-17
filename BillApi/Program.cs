@@ -2,6 +2,8 @@
 using Autofac.Extensions.DependencyInjection;
 using Autofac;
 using BillApi.DependencyResolver.Autofac;
+using BillApi.Constants;
+using Microsoft.Extensions.Configuration;
 
 namespace BillApi
 {
@@ -10,8 +12,11 @@ namespace BillApi
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
+            ConfigurationManager configurationManager = builder.Configuration;
             // Add services to the container.
+
+            ConnectionStringConstant.ConnectionString = configurationManager.GetSection("ConnectionString").Value;
+
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

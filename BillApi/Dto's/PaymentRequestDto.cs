@@ -5,7 +5,7 @@ namespace BillApi.Dto_s
 {
     public class PaymentRequestDto:IDTO
     {
-        public string InovoiceNumber { get; set; }
+        public string InvoiceNumber { get; set; }
         public string TermDate { get; set; }
         public string BuyerTaxID { get; set; }
         public string SuplierTaxID { get; set; }
@@ -19,7 +19,7 @@ namespace BillApi.Dto_s
                 TermDate = model.TermDate,
                 InvoiceCost = model.InvoiceCost,
                 BuyerTaxID = model.BuyerTaxID,
-                InovoiceNumber = model.InvoiceNumber,
+                InvoiceNumber = model.InvoiceNumber,
                 SuplierTaxID = model.SuplierTaxID,
                 InvoiceStatus = model.InovoiceStatus
             };

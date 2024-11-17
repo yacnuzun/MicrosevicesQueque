@@ -45,11 +45,6 @@ namespace BillApi.Controllers
         {
             var result = await _billService.GetBillDtowithBuyerID(buyerTaxId);
 
-            if (!result.Success)
-            {
-                return Ok(Messages.FailedProccess);
-            }
-
             return Ok(result.Data);
         }
 

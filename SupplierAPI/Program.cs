@@ -9,6 +9,7 @@ using Quartz;
 using Shared.Constant;
 using Shared.Helpers.Security.Encryption;
 using Shared.Helpers.Security.Security;
+using SupplierAPI.Constants;
 using SupplierAPI.Consumer;
 using SupplierAPI.DependencyResolver.AutofacHelper;
 using SupplierAPI.Extensions;
@@ -23,6 +24,7 @@ namespace SupplierAPI
             var builder = WebApplication.CreateBuilder(args);
             ConfigurationManager configurationManager = builder.Configuration;
 
+            ConnectionStringConstant.ConnectionString = configurationManager.GetSection("ConnectionString").Value;
             builder.Services.AddHttpContextAccessor();
 
             builder.Services.AddControllers();

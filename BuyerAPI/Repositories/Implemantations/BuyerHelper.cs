@@ -69,7 +69,7 @@ namespace BuyerAPI.Repositories.Implemantations
 
             if (request is null)
             {
-                return new ErrorDataResult<List<BillListingDTO>>(Messages.FailedProccess);
+                return new ErrorDataResult<List<BillListingDTO>>();
             }
 
             return new SuccessDataResult<List<BillListingDTO>>(request);

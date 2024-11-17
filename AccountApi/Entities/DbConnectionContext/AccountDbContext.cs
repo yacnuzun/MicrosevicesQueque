@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AccountApi.Constants;
+using Microsoft.EntityFrameworkCore;
 
 namespace AccountApi.Entities.DbConnectionContext
 {
@@ -6,7 +7,7 @@ namespace AccountApi.Entities.DbConnectionContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql(@"Host=pg-1825034b-yacn-4ec5.c.aivencloud.com:24051; Database=userdb; Username=avnadmin; Password=AVNS_tM18fCWJ4a0Hhvht1Cz");
+            optionsBuilder.UseNpgsql(ConnectionStringConstant.ConnectionString);
         }
 
         // User Authentication

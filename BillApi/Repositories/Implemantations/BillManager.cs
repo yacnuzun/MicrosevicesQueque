@@ -52,7 +52,7 @@ namespace BillApi.Repositories.Implemantations
 
                 }
 
-                return new ErrorDataResult<List<BillListingDTO>>(Messages.FailedProccess);
+                return new ErrorDataResult<List<BillListingDTO>>();
             }
         }
         

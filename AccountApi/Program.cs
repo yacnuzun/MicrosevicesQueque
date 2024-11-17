@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Shared.Helpers.Security.Encryption;
 using Microsoft.OpenApi.Models;
+using AccountApi.Entities.DbConnectionContext;
+using Microsoft.EntityFrameworkCore;
+using AccountApi.Constants;
 
 namespace AccountApi
 {
@@ -20,10 +23,13 @@ namespace AccountApi
             // Add services to the container.
             ConfigurationManager configurationManager = builder.Configuration;
 
+            ConnectionStringConstant.ConnectionString = configurationManager.GetSection("ConnectionString").Value;
+
             builder.Services.AddControllers();
             builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
             builder.Host.ConfigureContainer<ContainerBuilder>(builder => builder.RegisterModule(new AutofacBusinessModule()));
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(options =>
             {

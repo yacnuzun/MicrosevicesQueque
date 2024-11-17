@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SupplierAPI.Constants;
 
 namespace SupplierAPI.Entities.DbConectionContext
 {
@@ -6,7 +7,7 @@ namespace SupplierAPI.Entities.DbConectionContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql(@"Host=pg-1825034b-yacn-4ec5.c.aivencloud.com:24051; Database=suplierdb; Username=avnadmin; Password=AVNS_tM18fCWJ4a0Hhvht1Cz");
+            optionsBuilder.UseNpgsql(ConnectionStringConstant.ConnectionString);
         }
 
         public DbSet<Supplier> Suppliers { get; set; }

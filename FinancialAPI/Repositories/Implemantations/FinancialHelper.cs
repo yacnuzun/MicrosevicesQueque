@@ -1,6 +1,4 @@
-﻿using FinancialAPI.Entities.DbConnectionContext;
-using FinancialAPI.Repositories.Interfaces;
-using Microsoft.EntityFrameworkCore;
+﻿using FinancialAPI.Repositories.Interfaces;
 using Shared.Constant;
 using Shared.Helpers.ResponseModels.GenericResultModels;
 using IResult = Shared.Helpers.ResponseModels.GenericResultModels.IResult;
