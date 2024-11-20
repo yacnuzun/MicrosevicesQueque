@@ -40,8 +40,11 @@ namespace SupplierAPI.Repositories.Implemantations
             return new SuccessDataResult<JwtDto>(success, Messages.SuccessProccess);
         }
 
-        public async Task<IDataResult<EarlyPaymentEvent>> CreateAEarlyTask(string invoiceNumber)
+        public async Task<IDataResult<EarlyPaymentEvent>> CreateAEarlyTask(string invoiceNumber, string token)
         {
+            var headerAutho = new AuthenticationHeaderValue("Bearer", token.Replace("Bearer ", ""));
+
+            client.DefaultRequestHeaders.Authorization = headerAutho;
 
             var request = await client.PostAsJsonAsync("https://localhost:7221/bill/paymentarequest", new PaymentRequestControllerDto { InvoiceNumber = invoiceNumber });
 
@@ -73,8 +76,12 @@ namespace SupplierAPI.Repositories.Implemantations
 
         }
 
-        public async Task<IDataResult<List<BillListingDTO>>> GetBillswithSupplier(string supplierTaxId)
+        public async Task<IDataResult<List<BillListingDTO>>> GetBillswithSupplier(string supplierTaxId, string token)
         {
+            var headerAutho = new AuthenticationHeaderValue("Bearer", token.Replace("Bearer ", ""));
+
+            client.DefaultRequestHeaders.Authorization = headerAutho;
+
             var request = await client.GetFromJsonAsync<List<BillListingDTO>>("https://localhost:7221/bill/getbillsupplier?supplierTaxId=" + supplierTaxId);
 
             if (request is null)

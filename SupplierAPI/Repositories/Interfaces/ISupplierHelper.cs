@@ -7,8 +7,8 @@ namespace SupplierAPI.Repositories.Interfaces
 {
     public interface ISupplierHelper
     {
-        public Task<IDataResult<EarlyPaymentEvent>> CreateAEarlyTask(string invoiceNumber);
+        public Task<IDataResult<EarlyPaymentEvent>> CreateAEarlyTask(string invoiceNumber, string token);
         public Task<IDataResult<JwtDto>> CheckUser(string token);
-        public Task<IDataResult<List<BillListingDTO>>> GetBillswithSupplier(string supplierTaxId);
+        public Task<IDataResult<List<BillListingDTO>>> GetBillswithSupplier(string supplierTaxId, string token);
     }
 }

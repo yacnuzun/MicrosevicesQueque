@@ -7,8 +7,8 @@ namespace BuyerAPI.Repositories.Interfaces
 {
     public interface IBuyerHelper
     {
-        public Task<BillEvent> CreateABill(CreateBillDTO dto);
+        public Task<BillEvent> CreateABill(CreateBillDTO dto, string token);
         public Task<IDataResult<JwtDto>> CheckUser(string token);
-        public Task<IDataResult<List<BillListingDTO>>> GetBills(string buyerTaxId);
+        public Task<IDataResult<List<BillListingDTO>>> GetBills(string buyerTaxId, string token);
     }
 }

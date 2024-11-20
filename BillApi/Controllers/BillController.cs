@@ -1,5 +1,6 @@
 using BillApi.Dto_s;
 using BillApi.Repositories.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Constant;
 
@@ -17,6 +18,7 @@ namespace BillApi.Controllers
         }
 
         [HttpPost("createabill")]
+        [Authorize]
         public async Task<IActionResult> CreateABill(CreateBillDTO dto)
         {
             var result = await _billService.CreateABill(dto);
@@ -25,6 +27,7 @@ namespace BillApi.Controllers
         }
         
         [HttpPost("paymentarequest")]
+        [Authorize]
         public async Task<IActionResult> PaymentRequest(PaymentRequestControllerDto dto)
         {
             var result = await _billService.CreatePaymentRequest(dto.InvoiceNumber);
@@ -41,6 +44,7 @@ namespace BillApi.Controllers
         }
         
         [HttpGet("getbillbuyer")]
+        [Authorize]
         public async Task<IActionResult> GetBillBuyer(string buyerTaxId)
         {
             var result = await _billService.GetBillDtowithBuyerID(buyerTaxId);
@@ -49,6 +53,7 @@ namespace BillApi.Controllers
         }
 
         [HttpGet("getbillsupplier")]
+        [Authorize]
         public async Task<IActionResult> GetBillSupplier(string supplierTaxId)
         {
             var result = await _billService.GetBillDtowithSupplierID(supplierTaxId);

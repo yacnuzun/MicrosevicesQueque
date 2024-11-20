@@ -35,7 +35,7 @@ namespace BuyerAPI.Controllers
                 return false;
             }
 
-            var response = await _buyerHelper.CreateABill(dto);
+            var response = await _buyerHelper.CreateABill(dto, HttpContext.Request.Headers.Authorization.ToString());
 
             await _publishEndpoint.Publish(response);
 
@@ -54,7 +54,7 @@ namespace BuyerAPI.Controllers
                 return Ok(userRequest.Message);
             }
 
-            var list = await _buyerHelper.GetBills(userRequest.Data.NameIdentifier);
+            var list = await _buyerHelper.GetBills(userRequest.Data.NameIdentifier, HttpContext.Request.Headers.Authorization.ToString());
 
             if (!list.Success)
             {

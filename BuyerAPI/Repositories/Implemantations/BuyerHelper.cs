@@ -2,6 +2,7 @@
 using BuyerAPI.Entities;
 using BuyerAPI.Repositories.Interfaces;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Shared.Constant;
 using Shared.Dto_s;
 using Shared.Events;
@@ -40,8 +41,12 @@ namespace BuyerAPI.Repositories.Implemantations
             return new SuccessDataResult<JwtDto>(success,Messages.SuccessProccess);
         }
 
-        public async Task<BillEvent> CreateABill(CreateBillDTO dto)
+        public async Task<BillEvent> CreateABill(CreateBillDTO dto, string token)
         {
+            var headerAutho = new AuthenticationHeaderValue("Bearer", token.Replace("Bearer ", ""));
+
+            client.DefaultRequestHeaders.Authorization = headerAutho;
+
             var request = await client.PostAsJsonAsync("https://localhost:7221/Bill/createabill", dto);
 
             if (!request.IsSuccessStatusCode)
@@ -61,8 +66,12 @@ namespace BuyerAPI.Repositories.Implemantations
             return await Task.FromResult(BillEvent.GetViewModel(dtoResponse));
         }
 
-        public async Task<IDataResult<List<BillListingDTO>>> GetBills(string buyerTaxId)
+        public async Task<IDataResult<List<BillListingDTO>>> GetBills(string buyerTaxId, string token)
         {
+            var headerAutho = new AuthenticationHeaderValue("Bearer", token.Replace("Bearer ", ""));
+
+            client.DefaultRequestHeaders.Authorization = headerAutho;
+
             var request = await client.GetFromJsonAsync<List<BillListingDTO>>("https://localhost:7221/bill/getbillbuyer?buyerTaxId=" + buyerTaxId);
 
             //var response = JsonConvert.DeserializeObject<IDataResult<List<BillListingDTO>>>(request);

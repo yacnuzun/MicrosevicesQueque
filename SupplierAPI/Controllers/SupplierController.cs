@@ -35,7 +35,7 @@ namespace SupplierAPI.Controllers
                 return false;
             }
 
-            var request = await _suplierHelper.CreateAEarlyTask(invoice);
+            var request = await _suplierHelper.CreateAEarlyTask(invoice, HttpContext.Request.Headers.Authorization.ToString());
 
             if (!request.Success)
             {
@@ -59,7 +59,7 @@ namespace SupplierAPI.Controllers
                 return Ok(userRequest.Message);
             }
 
-            var request = await _suplierHelper.GetBillswithSupplier(userRequest.Data.NameIdentifier);
+            var request = await _suplierHelper.GetBillswithSupplier(userRequest.Data.NameIdentifier, HttpContext.Request.Headers.Authorization.ToString());
 
             if (request == null)
             {

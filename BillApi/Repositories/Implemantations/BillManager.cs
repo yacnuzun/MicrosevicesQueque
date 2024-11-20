@@ -28,7 +28,7 @@ namespace BillApi.Repositories.Implemantations
                     InovoiceStatus = Status.New,
                     InvoiceCost = dto.InvoiceCost,
                     InvoiceNumber = invoiceNum.ToString(),
-                    TermDate = string.IsNullOrEmpty(dto.TermDate) ? dto.TermDate : DateTime.Now.ToShortDateString()
+                    TermDate = string.IsNullOrEmpty(dto.TermDate) ? DateTime.Now.ToShortDateString() : dto.TermDate
                 };
 
                 var addedEntity = context.Entry(newBill);

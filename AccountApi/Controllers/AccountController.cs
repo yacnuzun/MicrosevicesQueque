@@ -44,6 +44,7 @@ namespace AccountApi.Controllers
         }
 
         [HttpPost("loginAcces")]
+        [Authorize]
         public async Task<ActionResult> LoginAccess(UserForLoginAccessDto role)
         {
             var jwtToken = _tokenHelper.ValidateTokenGetClaims(HttpContext.Request.Headers.Authorization.ToString().Replace("Bearer ", ""));
