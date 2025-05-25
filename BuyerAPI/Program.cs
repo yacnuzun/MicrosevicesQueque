@@ -24,7 +24,7 @@ namespace BuyerAPI
             // Add services to the container.
             ConfigurationManager configurationManager = builder.Configuration;
 
-            ConnectionStringConstant.ConnectionString = configurationManager.GetSection("ConnectionString").Value;
+            ConnectionStringConstant.ConnectionString = configurationManager.GetSection("DbConnection:ConnectionString").Value;
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

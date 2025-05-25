@@ -9,6 +9,8 @@ using Shared.Helpers.Security.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Shared.Helpers.Security.Encryption;
+using BillApi.Entities.DbConnectionContext;
+using Microsoft.EntityFrameworkCore;
 
 namespace BillApi
 {
@@ -20,7 +22,7 @@ namespace BillApi
             ConfigurationManager configurationManager = builder.Configuration;
             // Add services to the container.
 
-            ConnectionStringConstant.ConnectionString = configurationManager.GetSection("ConnectionString").Value;
+            ConnectionStringConstant.ConnectionString = configurationManager.GetSection("DbConnection:ConnectionString").Value;
 
 
             builder.Services.AddControllers();
@@ -52,6 +54,9 @@ namespace BillApi
                 });
 
             });
+            
+            builder.Services.AddDbContext<BillDbContext>(o =>
+            o.UseNpgsql(ConnectionStringConstant.ConnectionString));
 
             var tokenOptions = configurationManager.GetSection("TokenOptions").Get<TokenOptions>();
 

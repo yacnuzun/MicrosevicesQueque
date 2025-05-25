@@ -1,4 +1,4 @@
-﻿using Shared.Interfaces;
+﻿using Shared.Persistance.Entities;
 
 namespace SupplierAPI.Entities
 {

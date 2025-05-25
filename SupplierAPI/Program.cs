@@ -24,7 +24,7 @@ namespace SupplierAPI
             var builder = WebApplication.CreateBuilder(args);
             ConfigurationManager configurationManager = builder.Configuration;
 
-            ConnectionStringConstant.ConnectionString = configurationManager.GetSection("ConnectionString").Value;
+            ConnectionStringConstant.ConnectionString = configurationManager.GetSection("DbConnection:ConnectionString").Value;
             builder.Services.AddHttpContextAccessor();
 
             builder.Services.AddControllers();

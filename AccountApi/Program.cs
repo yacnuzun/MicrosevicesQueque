@@ -1,16 +1,15 @@
 
-using Autofac.Extensions.DependencyInjection;
+using AccountApi.Application.Validators;
+using AccountApi.Infrastructure.DependencyResolver.AutofacHelper;
+using AccountApi.Infrastructure.Helpers.JWT;
 using Autofac;
-using AccountApi.DependencyResolver.AutofacHelper;
-using Microsoft.Extensions.Configuration;
-using AccountApi.Helpers.JWT;
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using Shared.Helpers.Security.Encryption;
 using Microsoft.OpenApi.Models;
-using AccountApi.Entities.DbConnectionContext;
-using Microsoft.EntityFrameworkCore;
-using AccountApi.Constants;
+using Shared.Helpers.Security.Encryption;
+using System.Text.Json.Serialization;
+using FluentValidation;
 
 namespace AccountApi
 {
@@ -23,9 +22,13 @@ namespace AccountApi
             // Add services to the container.
             ConfigurationManager configurationManager = builder.Configuration;
 
-            ConnectionStringConstant.ConnectionString = configurationManager.GetSection("ConnectionString").Value;
+            builder.Services.AddValidatorsFromAssemblyContaining<RegisterUserValidator>();
 
-            builder.Services.AddControllers();
+
+            builder.Services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            });
             builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
             builder.Host.ConfigureContainer<ContainerBuilder>(builder => builder.RegisterModule(new AutofacBusinessModule()));
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

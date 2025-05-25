@@ -5,10 +5,14 @@ namespace BillApi.Entities.DbConnectionContext
 {
     public class BillDbContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public BillDbContext(DbContextOptions builder):base(builder)
         {
-            optionsBuilder.UseNpgsql(ConnectionStringConstant.ConnectionString);
         }
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseNpgsql(ConnectionStringConstant.ConnectionString);
+        //}
         public DbSet<Bill> Bills { get; set; }
     }
 }
