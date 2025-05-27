@@ -1,6 +1,8 @@
 ﻿using AccountApi.Application.Services.Interfaces;
+using AccountApi.Domain.Enums;
 using AccountApi.Dto_s;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AccountApi.WebApi.Controllers
@@ -17,6 +19,7 @@ namespace AccountApi.WebApi.Controllers
             _validator = validator;
         }
 
+        //[Authorize(Roles = UserRolesConst.Admin)]
         [HttpPost("addoperationclaim")]
         public async Task<IActionResult> AddOperationClaim(ClaimDto operationClaim)
         {
@@ -25,6 +28,7 @@ namespace AccountApi.WebApi.Controllers
             {
                 return BadRequest(isValidate.Errors);
             }
+            
             var result = await _operationClaimService.Add(operationClaim);
             if (!result.Success)
             {

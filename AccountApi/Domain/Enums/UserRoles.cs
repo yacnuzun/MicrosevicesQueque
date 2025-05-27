@@ -4,6 +4,7 @@
     {
         Buyer,
         Supplier,
-        Financial
+        Financial,
+        Admin
     }
 }

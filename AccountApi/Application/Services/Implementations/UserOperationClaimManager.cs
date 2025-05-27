@@ -4,6 +4,7 @@ using Shared.Persistance.Interfaces;
 using AccountApi.Application.Services.Interfaces;
 using AccountApi.Domain.Entities;
 using AccountApi.Infrastructure.Repositories.Interfaces;
+using AccountApi.Domain.Enums;
 
 namespace AccountApi.Application.Services.Implementations
 {
@@ -20,7 +21,7 @@ namespace AccountApi.Application.Services.Implementations
             _logger = logger;
         }
 
-        public async Task<IResult> Add(UserOperationClaim userOperationClaim)
+        public async Task<IResult> AddAsync(UserOperationClaim userOperationClaim)
         {
             try
             {
@@ -39,5 +40,22 @@ namespace AccountApi.Application.Services.Implementations
             }
 
         }
+
+        public async Task<IResult> AddWithoutCommitAsync(UserOperationClaim userOperationClaim)
+        {
+            try
+            {
+                await _userClaimRepository.AddAsync(userOperationClaim);
+
+                return new SuccesResult();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"{ex.Message}", ex);
+                throw;
+            }
+
+        }
+
     }
 }

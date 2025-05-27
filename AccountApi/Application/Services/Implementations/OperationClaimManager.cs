@@ -47,14 +47,14 @@ namespace AccountApi.Application.Services.Implementations
 
         }
 
-        public async Task<IResult> GetOperation(string operation)
+        public async Task<IDataResult<OperationClaim>> GetOperation(string operation)
         {
             var result = await _operationClaimRepository.GetAsync(o => o.Name == operation);
             if (result == null)
             {
-                return new ErrorResult();
+                return new ErrorDataResult<OperationClaim>();
             }
-            return new SuccesResult();
+            return new SuccessDataResult<OperationClaim>(result);
         }
     }
 }

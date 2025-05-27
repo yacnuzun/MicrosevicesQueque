@@ -2,12 +2,12 @@
 using AccountApi.Dto_s;
 using Shared.Helpers.ResponseModels.GenericResultModels;
 using IResult = Shared.Helpers.ResponseModels.GenericResultModels.IResult;
-
 namespace AccountApi.Application.Services.Interfaces
 {
-    public interface IOperationClaimService
+    public interface ITemplateMailService
     {
-        Task<IResult> Add(ClaimDto operationClaim);
-        Task<IDataResult<OperationClaim>> GetOperation(string operation);
+        Task<IResult> Add(TemplateAddDto emailTemplate);
+        Task<IResult> Update(TemplateUpdateDto emailTemplate);
+        Task<IDataResult<EmailTemplate>> GetMailTemplate(string mailCode);
     }
 }

@@ -10,6 +10,11 @@ using Microsoft.OpenApi.Models;
 using Shared.Helpers.Security.Encryption;
 using System.Text.Json.Serialization;
 using FluentValidation;
+using Shared.Helpers.Mailing;
+using MassTransit;
+using AccountApi.Infrastructure.Helpers.Consumer;
+using Shared.Constant;
+using Shared.Events;
 
 namespace AccountApi
 {
@@ -21,9 +26,6 @@ namespace AccountApi
 
             // Add services to the container.
             ConfigurationManager configurationManager = builder.Configuration;
-
-            builder.Services.AddValidatorsFromAssemblyContaining<RegisterUserValidator>();
-
 
             builder.Services.AddControllers().AddJsonOptions(options =>
             {
@@ -61,6 +63,26 @@ namespace AccountApi
 
             });
             var tokenOptions = configurationManager.GetSection("TokenOptions").Get<TokenOptions>();
+
+            builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("EmailSettings"));
+
+            builder.Services.AddMassTransit(x =>
+            {
+                x.AddConsumer<UserRegisteredConsumer>();
+                x.AddRequestClient<UserRegisteredEvent>();
+                x.UsingRabbitMq((context, _configurator) =>
+                {
+                    _configurator.Host(builder.Configuration.GetSection("RabbitOptions:Url").Value, h =>
+                    {
+                        h.Username(builder.Configuration.GetSection("RabbitOptions:User").Value);
+                        h.Password(builder.Configuration.GetSection("RabbitOptions:Password").Value);
+                    });
+                    _configurator.ReceiveEndpoint(RabbitMQSettings.Payment_OrderCreatedEventQueue, e =>
+                    e.ConfigureConsumer<UserRegisteredConsumer>(context));
+                });
+
+            });
+
 
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                             .AddJwtBearer(options =>

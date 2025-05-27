@@ -1,11 +1,14 @@
 using AccountApi.Application.Services.Interfaces;
 using AccountApi.Dto_s;
 using AccountApi.Infrastructure.Helpers.JWT;
+using FluentValidation;
+using MassTransit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using Shared.Constant;
 using Shared.Dto_s;
+using Shared.Events;
 using Shared.Helpers.ResponseModels.GenericResultModels;
 using System.Data;
 
@@ -15,13 +18,19 @@ namespace AccountApi.WebApi.Controllers
     [Route("[controller]")]
     public class AccountController : ControllerBase
     {
-        readonly IAuthService _authService;
-        readonly ITokenHelper _tokenHelper;
-
-        public AccountController(IAuthService authService, ITokenHelper tokenHelper)
+        private readonly IAuthService _authService;
+        private readonly ITokenHelper _tokenHelper;
+        private readonly IPublishEndpoint _publishEndpoint;
+        private readonly IValidator<UserForRegisterDto> _validator;
+        public AccountController(IAuthService authService, 
+            ITokenHelper tokenHelper, 
+            IPublishEndpoint publishEndpoint, 
+            IValidator<UserForRegisterDto> validator)
         {
             _authService = authService;
             _tokenHelper = tokenHelper;
+            _publishEndpoint = publishEndpoint;
+            _validator = validator;
         }
 
         [HttpPost("login")]
@@ -43,7 +52,7 @@ namespace AccountApi.WebApi.Controllers
             return Ok(result.Data);
         }
 
-        [HttpPost("loginAcces")]
+        [HttpPost("loginaccess")]
         [Authorize]
         public async Task<ActionResult> LoginAccess(UserForLoginAccessDto role)
         {
@@ -68,11 +77,24 @@ namespace AccountApi.WebApi.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
+            var isValid = await _validator.ValidateAsync(userForRegisterDto);
+            if (!isValid.IsValid)
+            {
+                return BadRequest(isValid.Errors);
+            }
             var result = await _authService.Register(userForRegisterDto);
             if (!result.Success)
             {
                 return BadRequest(result.Message);
             }
+            //RabbitMQ Kullanýlacak
+            await _publishEndpoint.Publish(
+                        new UserRegisteredEvent
+                        {
+                            Email = result.Data.Email,
+                            FullName = result.Data.UserName
+                        }
+                );
             return Ok(result.Data);
         }
 

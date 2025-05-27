@@ -11,8 +11,4 @@ namespace AccountApi.Dto_s
         public string Email { get; set; }
         public UserRoles Role { get; set; }
     }
-    public class ClaimDto : IDTO
-    {
-        public UserRoles Role { get; set; }
-    }
 }
