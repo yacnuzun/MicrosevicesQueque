@@ -36,6 +36,8 @@ namespace AccountApi.Infrastructure.DependencyResolver.AutofacHelper
             builder.RegisterType<OperationClaimRepository>().As<IOperationClaimRepository>();
             builder.RegisterType<EmailTemplateManager>().As<ITemplateMailService>();
             builder.RegisterType<EfMailTemplateDal>().As<IEfMailTemplateDal>();
+            builder.RegisterType<EfFailureLogDal>().As<IEfFailureLogDal>();
+            builder.RegisterType<FailureLogManager>().As<IFailureLogService>();
             #endregion
 
             builder.Register(context =>
@@ -48,6 +50,7 @@ namespace AccountApi.Infrastructure.DependencyResolver.AutofacHelper
             })
             .AsSelf()
             .InstancePerLifetimeScope();
+            
 
             #region validators
             builder.RegisterType<ClaimValidator>().As<IValidator<ClaimDto>>().InstancePerLifetimeScope();

@@ -3,6 +3,7 @@ using System;
 using AccountApi.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AccountApi.Migrations
 {
     [DbContext(typeof(AccountDbContext))]
-    partial class AccountDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250529204731_AddFailureLogTable")]
+    partial class AddFailureLogTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,10 +67,6 @@ namespace AccountApi.Migrations
 
                     b.Property<DateTime>("FailedAt")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("FailedConstrait")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<string>("FullName")
                         .IsRequired()
