@@ -18,6 +18,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountUnitTest", "AccountUnitTest\AccountUnitTest.csproj", "{5EEB696F-D78C-45D4-8AFA-128AD22E611F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{25738955-279F-4700-8BA5-DBF93EBD7857}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{2E3F9AB5-63CD-4745-88A8-0EC485FBA52D}"
 EndProject
