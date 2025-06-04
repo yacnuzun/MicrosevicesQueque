@@ -3,26 +3,29 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "DataAccess\Shared.csproj", "{C6BFC92E-21F6-4ECF-95ED-28A138584921}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuyerAPI", "src\BuyerAPI\BuyerAPI.csproj", "{9C5C3C39-4786-4AEB-8C34-07D6F9BD499F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuyerAPI", "BuyerAPI\BuyerAPI.csproj", "{9C5C3C39-4786-4AEB-8C34-07D6F9BD499F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SupplierAPI", "src\SupplierAPI\SupplierAPI.csproj", "{9C1ACF4F-223F-4A5C-93B5-2FC0E13E1BC6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SupplierAPI", "SupplierAPI\SupplierAPI.csproj", "{9C1ACF4F-223F-4A5C-93B5-2FC0E13E1BC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinancialAPI", "src\FinancialAPI\FinancialAPI.csproj", "{AF436374-AC81-4AC3-B7B1-A55E00DBCDFF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinancialAPI", "FinancialAPI\FinancialAPI.csproj", "{AF436374-AC81-4AC3-B7B1-A55E00DBCDFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountApi", "src\AccountApi\AccountApi.csproj", "{D016ECF3-FCA7-4844-B961-0530F1001BE5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountApi", "AccountApi\AccountApi.csproj", "{D016ECF3-FCA7-4844-B961-0530F1001BE5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillApi", "src\BillApi\BillApi.csproj", "{E8A4CC79-2167-493B-958F-2706BD279BA4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillApi", "BillApi\BillApi.csproj", "{E8A4CC79-2167-493B-958F-2706BD279BA4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountUnitTest", "AccountUnitTest\AccountUnitTest.csproj", "{5EEB696F-D78C-45D4-8AFA-128AD22E611F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountUnitTest", "tests\AccountUnitTest\AccountUnitTest.csproj", "{5EEB696F-D78C-45D4-8AFA-128AD22E611F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{25738955-279F-4700-8BA5-DBF93EBD7857}"
-	ProjectSection(SolutionItems) = preProject
-		docker-compose.yml = docker-compose.yml
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{2E3F9AB5-63CD-4745-88A8-0EC485FBA52D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "src\Shared\Shared.csproj", "{AECD75ED-F62F-4191-9F9C-C10ABFAB79E3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{43BD2E18-0E46-4C4C-9054-FB4E6DFC5752}"
+	ProjectSection(SolutionItems) = preProject
+		.dockerignore = .dockerignore
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,10 +33,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C6BFC92E-21F6-4ECF-95ED-28A138584921}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C6BFC92E-21F6-4ECF-95ED-28A138584921}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C6BFC92E-21F6-4ECF-95ED-28A138584921}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C6BFC92E-21F6-4ECF-95ED-28A138584921}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9C5C3C39-4786-4AEB-8C34-07D6F9BD499F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9C5C3C39-4786-4AEB-8C34-07D6F9BD499F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C5C3C39-4786-4AEB-8C34-07D6F9BD499F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -58,6 +57,10 @@ Global
 		{5EEB696F-D78C-45D4-8AFA-128AD22E611F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5EEB696F-D78C-45D4-8AFA-128AD22E611F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5EEB696F-D78C-45D4-8AFA-128AD22E611F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AECD75ED-F62F-4191-9F9C-C10ABFAB79E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AECD75ED-F62F-4191-9F9C-C10ABFAB79E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AECD75ED-F62F-4191-9F9C-C10ABFAB79E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AECD75ED-F62F-4191-9F9C-C10ABFAB79E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,6 +72,7 @@ Global
 		{D016ECF3-FCA7-4844-B961-0530F1001BE5} = {25738955-279F-4700-8BA5-DBF93EBD7857}
 		{E8A4CC79-2167-493B-958F-2706BD279BA4} = {25738955-279F-4700-8BA5-DBF93EBD7857}
 		{5EEB696F-D78C-45D4-8AFA-128AD22E611F} = {2E3F9AB5-63CD-4745-88A8-0EC485FBA52D}
+		{AECD75ED-F62F-4191-9F9C-C10ABFAB79E3} = {25738955-279F-4700-8BA5-DBF93EBD7857}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FDCF01EC-BC93-483E-AE12-6A10FCD850F6}

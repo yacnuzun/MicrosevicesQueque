@@ -1,0 +1,26 @@
+services:
+  accountapi:
+    build:
+      context: ./src
+      dockerfile: AccountApi/WebApi/Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./secret.json:/app/secret.json:ro
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - DbConnection__ConnectionString=Host=host.docker.internal;Port=5433;Database=userdb;Username=postgres;Password=123456
+      - EmailSettings__SenderMail=yalcin.zn96@gmail.com
+      - EmailSettings__SmtpServer=smtp.gmail.com
+      - EmailSettings__Port=587
+      - EmailSettings__Password=vucnphtdibpupcna
+      - RabbitOptions__Url=amqps://akefusna:Ioq_yWcc9HnA_JP5LOQ1SUW31Bj2wEYp@leopard.lmq.cloudamqp.com/akefusna
+      - RabbitOptions__User=akefusna
+      - RabbitOptions__Password=Ioq_yWcc9HnA_JP5LOQ1SUW31Bj2wEYp
+    networks:
+      - micro_net
+      
+
+networks:
+  micro_net:
+    driver: bridge

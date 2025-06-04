@@ -16,6 +16,7 @@ using AccountApi.Infrastructure.Helpers.Consumer;
 using Shared.Constant;
 using Shared.Events;
 using AccountApi.WebApi.Configuration;
+using Autofac.Core;
 
 namespace AccountApi
 {
@@ -99,7 +100,7 @@ namespace AccountApi
 
             app.MapControllers();
 
-            app.Run();
+            app.Run("http://0.0.0.0:5000");
         }
     }
 }
