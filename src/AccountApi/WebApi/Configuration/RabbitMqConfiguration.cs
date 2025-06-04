@@ -15,10 +15,10 @@ namespace AccountApi.WebApi.Configuration
 
             services.AddMassTransit(x =>
                 {
-                    
+                    x.SetKebabCaseEndpointNameFormatter();
+
                     x.AddConsumer<UserRegisteredConsumer>();
                     x.AddConsumer<UserRegistrationFailedConsumer>();
-
 
                     x.UsingRabbitMq((context, cfg) =>
                     {
@@ -39,13 +39,14 @@ namespace AccountApi.WebApi.Configuration
 
                         });
 
+                        
                         cfg.ReceiveEndpoint("user-registered-failed-queue", e =>
                         {
                             e.ConfigureConsumer<UserRegistrationFailedConsumer>(context);
 
                         });
 
-
+                        cfg.ConfigureEndpoints(context, new KebabCaseEndpointNameFormatter("accountapi", false));
 
                     });
                 });

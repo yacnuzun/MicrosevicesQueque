@@ -76,9 +76,9 @@ namespace AccountApi.Infrastructure.Helpers.Consumer
                 {
                     if (inner is not null||!string.IsNullOrEmpty(inner.Email))
                     {
-                        _publishEndpoint.Publish(inner);
+                      await  _publishEndpoint.Publish(inner);
                     }
-                    throw;
+                    return;
 
                 }
 
@@ -87,5 +87,5 @@ namespace AccountApi.Infrastructure.Helpers.Consumer
 
         }
     }
-
+    
 }
