@@ -28,6 +28,19 @@
 
 ## 🧱 Proje Yapısı
 
+```bash
+/MicroservicesQueue
+│
+├── src
+│ ├── OrderService.Api
+│ ├── InventoryService.Api
+│ ├── NotificationService.Api
+│ ├── SharedLibraries
+│ └── BuildingBlocks
+│
+├── docker-compose.yml
+└── README.md
+```
 - **OrderService**: Sipariş işlemlerini yönetir ve kuyruklara mesaj bırakır.
 - **InventoryService**: Stoğu günceller, mesaj kuyruğunu dinler.
 - **NotificationService**: MailKit ile e-posta gönderimleri yapar.
