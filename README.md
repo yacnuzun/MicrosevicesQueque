@@ -32,21 +32,40 @@
 /MicroservicesQueue
 │
 ├── src
-│ ├── OrderService.Api
-│ ├── InventoryService.Api
-│ ├── NotificationService.Api
+│ ├── AccountApi
+│ ├── BillApi
+│ ├── BuyerApi
+│ ├── FinancialApi
 │ ├── SharedLibraries
-│ └── BuildingBlocks
+│ └── SupplierApi
+├── tests
+│ ├── AccountUnitApi
 │
 ├── docker-compose.yml
 └── README.md
 ```
-- **OrderService**: Sipariş işlemlerini yönetir ve kuyruklara mesaj bırakır.
-- **InventoryService**: Stoğu günceller, mesaj kuyruğunu dinler.
-- **NotificationService**: MailKit ile e-posta gönderimleri yapar.
-- **SharedLibraries**: DTO’lar, BaseEntity, Result, Mail servisleri vb. içerir.
-- **BuildingBlocks**: Core katmanı, Generic Repository, UoW, BaseResponse gibi altyapı kodlarını içerir.
+- 📦 Mikroservisler
+    - **AccountApi**: Kullanıcı kayıt ve giriş işlemlerini kontrol eder.
+    - **BillApi**: Fatura kesimi yapar.
+    - **FinancialApi**: Finans kurumlarının tedarikçilerin attıkları isteklere cevap verdiği servis.
+    - **SupplierApi**: Tedarikçilerin erken ödeme talebi açmalarını sağlayan ve kuyruğu dinleyerek alınan faturaları bildiren servis.
 
+- 🔁 Ortak Bileşenler
+    - **SharedLibraries**: Mikroservisler arasında ortak kullanılan tüm yardımcı sınıfları içerir:
+
+      - **Interfaces**: Repository, Mail, Hashing gibi servis soyutlamaları.
+
+      - **Event Models**: RabbitMQ mesajlaşma altyapısı için kullanılan event sınıfları.
+
+      - **BaseEntity**: Ortak entity özelliklerini tanımlar (örneğin Id, CreatedDate).
+
+      - **Security**: JWT token yönetimi, TokenOptions ve şifreleme algoritmaları (SHA256, HMAC).
+
+      - **Result Yapısı**: Başarı/başarısızlık durumları için standart sonuç modelleri.
+
+      - **MailService**: SMTP üzerinden e-posta gönderimi yapan yapı.
+
+      - **Generic Repository & Unit of Work**: Veritabanı işlemleri için ortak veri erişim katmanı.
 ---
 
 ## 🛠️ Kurulum (Docker ile Çalıştırma)
@@ -55,14 +74,14 @@
 
 1. Repoyu klonlayın:
 
-```bash
-git clone https://github.com/kullanici-adi/MicroservicesQueue.git
-cd MicroservicesQueue
-```
+    ```bash
+        git clone https://github.com/kullanici-adi/MicroservicesQueue.git
+        cd MicroservicesQueue
+    ```
 2. Docker'ı Kurun:
-```bash
-docker-compose up --build
-```
+    ```bash
+        docker-compose up --build
+    ```
 ---
 ## ✅ Özellikler
 
